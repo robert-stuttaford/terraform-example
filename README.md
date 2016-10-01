@@ -1,6 +1,6 @@
 # Terraform Example
 
-This code is extracted from Cognician's 3rd-gen AWS infrastructure, about a month after it was built, on Oct 1.
+This code was extracted from Cognician's 3rd-gen AWS infrastructure on Oct 1 2016.
 
 Cognician's codebase is still very much a work in progress :-)
 
