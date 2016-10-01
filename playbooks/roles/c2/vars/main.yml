@@ -1,0 +1,3 @@
+c2_memory_index_max: 750m
+c2_object_cache_max: 3000m
+c2_xmx: 6000m

@@ -1,0 +1,11 @@
+c2_domain: xxx
+c3_domain: xxx
+cog_media_bucket: xxx
+cognician_environment: xxx
+events_database_uri: xxx
+generated_media_bucket: xxx
+memcached_uri: xxx
+primary_database_uri: xxx
+root_domain: xxx
+static_media_bucket: xxx
+user_media_bucket: xxx

@@ -1,0 +1,2 @@
+- name: Cognician environment
+  template: src=cognician.env dest=/opt/ owner=ubuntu group=users

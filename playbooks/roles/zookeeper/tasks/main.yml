@@ -1,0 +1,37 @@
+- name: Download ZooKeeper
+  get_url: url=http://www.mirrorservice.org/sites/ftp.apache.org/zookeeper/current/zookeeper-{{ zookeeper_version }}.tar.gz
+           dest=/tmp/zookeeper-{{ zookeeper_version }}.tar.gz
+           owner=ubuntu
+           group=users
+
+- name: Unpack Zookeeper
+  command: tar xzf /tmp/zookeeper-{{ zookeeper_version }}.tar.gz -C /opt/ creates=/opt/zookeeper-{{ zookeeper_version }}
+
+- name: Ensure zookeeper is mode 0755
+  command: chown -R ubuntu:users /opt/zookeeper-{{ zookeeper_version }}
+
+- name: Link to Zookeeper Directory
+  file: src=/opt/zookeeper-{{ zookeeper_version }}
+        dest=/opt/zookeeper
+        state=link
+        force=yes
+        owner=ubuntu
+        group=users
+
+- name: Create Zookeeper Config Dir
+  file: path={{ zookeeper_conf_dir }} recurse=yes state=directory mode=0754 owner=ubuntu group=users
+
+- name: Create Zookeeper Transations Dir
+  file: path=/opt/zookeeper/transactions recurse=yes state=directory mode=0754 owner=ubuntu group=users
+
+- name: Create Zookeeper Log Dir
+  file: path={{ zookeeper_log_dir }} recurse=yes state=directory mode=0754 owner=ubuntu group=users
+
+- name: Create Zookeeper DataStore Dir
+  file: path={{ zookeeper_datastore_dir }} recurse=yes state=directory mode=0754 owner=ubuntu group=users
+
+- name: Setup log4j
+  template: src=log4j.properties dest="{{ zookeeper_conf_dir }}/log4j.properties" owner=ubuntu group=users mode=644
+
+- name: Setup Datadog integration
+  copy: src=zookeeper.yaml dest=/etc/dd-agent/conf.d/ owner=ubuntu group=users mode=754

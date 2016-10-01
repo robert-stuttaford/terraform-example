@@ -1,0 +1,6 @@
+- become: true
+  become_method: sudo
+  hosts: "{{ target | default('tag_Type_Backup') }}"
+  roles:
+    - update_hostname
+    - backup

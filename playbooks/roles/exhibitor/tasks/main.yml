@@ -1,0 +1,29 @@
+- name: Install Maven
+  apt: pkg=maven state=latest update_cache=yes
+
+- name: Create Exhibitor Install Dir
+  file: path={{ exhibitor_install_dir }} state=directory owner=ubuntu group=users
+
+- name: Create Exhibitor Build Dir
+  file: path={{ exhibitor_install_dir }}/{{ exhibitor_version }} state=directory mode=0644 owner=ubuntu group=users
+
+- name: Create Exhibitor POM
+  template: src=pom.xml dest={{ exhibitor_install_dir }}/{{ exhibitor_version }}/
+
+- name: Build Exhibitor jar
+  command: '/usr/bin/mvn clean package -f {{ exhibitor_install_dir }}/{{ exhibitor_version }}/pom.xml creates={{ exhibitor_install_dir }}/{{ exhibitor_version }}/target/exhibitor-{{ exhibitor_version }}.jar'
+
+- name: Copy Exhibitor jar
+  command: 'cp {{ exhibitor_install_dir }}/{{ exhibitor_version }}/target/exhibitor-{{ exhibitor_version }}.jar {{ exhibitor_install_dir }}/exhibitor-standalone-{{ exhibitor_version }}.jar creates={{ exhibitor_install_dir }}/exhibitor-standalone-{{ exhibitor_version }}.jar'
+
+- name: Exhibitor Properties Config
+  template: src=exhibitor.properties dest={{ exhibitor_install_dir }}/
+
+- name: Exhibitor script - Run app
+  template: src=run-exhibitor.sh dest=/opt/ owner=ubuntu group=users mode=0755
+
+- name: Exhibitor service
+  copy: src=exhibitor.service dest=/etc/systemd/system/ owner=root group=root mode=0644
+  notify:
+    - Enable Exhibitor service
+    - Start Exhibitor service

@@ -1,0 +1,5 @@
+database_backup_source_uri: xxx
+database_backup_target_uri: xxx
+datomic_license_password: xxx
+datomic_license_user: xxx
+datomic_version: 0.9.5394

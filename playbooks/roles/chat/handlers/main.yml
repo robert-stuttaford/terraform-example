@@ -1,0 +1,11 @@
+- name: Enable Chat service
+  service: name=chat enabled=yes
+
+- name: Enable Papertrail service
+  service: name=papertrail enabled=yes
+
+- name: Enable Codedeploy agent
+  service: name=codedeploy-agent enabled=yes
+
+- name: Start Codedeploy agent
+  service: name=codedeploy-agent state=started

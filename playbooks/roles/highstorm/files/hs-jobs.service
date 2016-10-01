@@ -1,0 +1,13 @@
+[Unit]
+After=syslog.target network.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+SyslogIdentifier=hs-jobs
+StandardOutput=syslog
+StandardError=syslog
+ExecStart=/opt/run-hs-jobs.sh
+
+[Install]
+WantedBy=multi-user.target

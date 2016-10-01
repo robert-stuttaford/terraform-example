@@ -1,0 +1,8 @@
+- become: true
+  become_method: sudo
+  hosts: "{{ target | default('tag_Type_Highstorm') }}"
+  roles:
+    - update_hostname
+    - cognician_environment
+    - datadog
+    - highstorm

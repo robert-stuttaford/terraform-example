@@ -1,0 +1,11 @@
+- name: Enable C2 service
+  service: name=c2 enabled=yes
+
+- name: Enable Papertrail service
+  service: name=papertrail enabled=yes
+
+- name: Enable Codedeploy agent
+  service: name=codedeploy-agent enabled=yes
+
+- name: Start Codedeploy agent
+  service: name=codedeploy-agent state=started

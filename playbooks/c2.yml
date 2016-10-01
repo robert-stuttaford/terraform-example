@@ -1,0 +1,11 @@
+- become: true
+  become_method: sudo
+  hosts: "{{ target | default('tag_Type_C2') }}"
+  roles:
+    - update_hostname
+    - cognician_environment
+    - nginx
+    - datadog
+    - c2
+  vars:
+    nginx_proxy_port: 8080

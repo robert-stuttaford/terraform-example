@@ -1,0 +1,1 @@
+variable "shared_secret" {}

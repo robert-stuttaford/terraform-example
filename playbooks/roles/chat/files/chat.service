@@ -1,0 +1,17 @@
+[Unit]
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=ubuntu
+SyslogIdentifier=chat
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+ExecStart=/opt/run.sh
+ExecStop=/bin/kill -SIGTERM $MAINPID
+ExecReload=/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

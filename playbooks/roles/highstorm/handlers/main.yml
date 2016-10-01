@@ -1,0 +1,17 @@
+- name: Enable Aeron service
+  service: name=aeron enabled=yes
+
+- name: Enable Highstorm - Jobs service
+  service: name=hs-jobs enabled=yes
+
+- name: Enable Highstorm - Peers service
+  service: name=hs-peers enabled=yes
+
+- name: Enable Papertrail service
+  service: name=papertrail enabled=yes
+
+- name: Enable Codedeploy agent
+  service: name=codedeploy-agent enabled=yes
+
+- name: Start Codedeploy agent
+  service: name=codedeploy-agent state=started

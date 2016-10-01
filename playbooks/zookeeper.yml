@@ -1,0 +1,7 @@
+- become: true
+  become_method: sudo
+  hosts: "{{ target | default('tag_Type_Zookeeper') }}"
+  roles:
+    - update_hostname
+    - zookeeper
+    - exhibitor

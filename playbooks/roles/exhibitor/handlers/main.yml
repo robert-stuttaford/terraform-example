@@ -1,0 +1,5 @@
+- name: Enable Exhibitor service
+  service: name=exhibitor enabled=yes
+
+- name: Start Exhibitor service
+  service: name=exhibitor state=started

@@ -1,0 +1,12 @@
+[Unit]
+After=systemd-journald.service aeron.service hs-peers.service
+Requires=systemd-journald.service aeron.service hs-peers.service
+
+[Service]
+ExecStart=/bin/sh -c "journalctl -f -u aeron -u hs-jobs -u hs-peers | ncat --ssl logs4.papertrailapp.com 47837"
+TimeoutStartSec=0
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

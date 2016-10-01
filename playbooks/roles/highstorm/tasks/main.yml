@@ -1,0 +1,42 @@
+- name: Aeron service
+  copy: src=aeron.service dest=/etc/systemd/system/ owner=root group=root mode=0644
+  notify: Enable Aeron service
+
+- name: Highstorm - Jobs service
+  copy: src=hs-jobs.service dest=/etc/systemd/system/ owner=root group=root mode=0644
+  notify: Enable Highstorm - Jobs service
+
+- name: Highstorm - Peers service
+  copy: src=hs-peers.service dest=/etc/systemd/system/ owner=root group=root mode=0644
+  notify: Enable Highstorm - Peers service
+
+- name: Papertrail service
+  copy: src=papertrail.service dest=/etc/systemd/system/ owner=root group=root mode=0644
+  notify: Enable Papertrail service
+
+- name: App environment
+  template: src=app.env dest=/opt/ owner=ubuntu group=users
+
+- name: Discover instances by type tag
+  copy: src=list_instance_ips_for_type_tag.sh dest=/opt/ owner=ubuntu group=users mode=0755
+
+- name: Codedeploy script - Start app service
+  copy: src=start.sh dest=/opt/ owner=ubuntu group=users mode=0755
+
+- name: Codedeploy script - Run Aeron
+  copy: src=run-aeron.sh dest=/opt/ owner=ubuntu group=users mode=0755
+
+- name: Codedeploy script - Run Highstorm - Jobs
+  copy: src=run-hs-jobs.sh dest=/opt/ owner=ubuntu group=users mode=0755
+
+- name: Codedeploy script - Run Highstorm - Peers
+  copy: src=run-hs-peers.sh dest=/opt/ owner=ubuntu group=users mode=0755
+
+- name: Codedeploy script - Validate app
+  copy: src=validate.sh dest=/opt/ owner=ubuntu group=users mode=0755
+
+- name: Codedeploy script - Stop app
+  copy: src=stop.sh dest=/opt/ owner=ubuntu group=users mode=0755
+  notify:
+    - Enable Codedeploy agent
+    - Start Codedeploy agent

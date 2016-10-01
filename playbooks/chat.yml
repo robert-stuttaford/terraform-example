@@ -1,0 +1,11 @@
+- become: true
+  become_method: sudo
+  hosts: "{{ target | default('tag_Type_Chat') }}"
+  roles:
+    - update_hostname
+    - cognician_environment
+    - nginx_tcp
+    - datadog
+    - chat
+  vars:
+    nginx_proxy_port: 3000

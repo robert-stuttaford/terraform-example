@@ -1,0 +1,3 @@
+chat_memory_index_max: 750m
+chat_object_cache_max: 3000m
+chat_xmx: 6000m

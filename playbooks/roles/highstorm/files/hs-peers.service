@@ -1,0 +1,18 @@
+[Unit]
+After=syslog.target network.target aeron.service
+Wants=aeron.service
+
+[Service]
+Type=simple
+User=ubuntu
+SyslogIdentifier=hs-peers
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+ExecStart=/opt/run-hs-peers.sh
+ExecStop=/bin/kill -SIGTERM $MAINPID
+ExecReload=/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

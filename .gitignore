@@ -1,0 +1,6 @@
+proposed.plan
+.terraform
+*.tfstate
+*.tfstate.backup
+ansible-playbooks.tar.gz
+tf_outputs.json

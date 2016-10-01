@@ -1,0 +1,6 @@
+zookeeper_hosts: ":2181"
+zookeeper_version: 3.4.9
+zookeeper_conf_dir: /etc/zookeeper/conf
+zookeeper_log_dir: /var/log/zookeeper
+zookeeper_datastore_dir: /var/lib/zookeeper
+monasca_log_level: WARN

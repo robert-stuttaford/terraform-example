@@ -1,0 +1,12 @@
+[Unit]
+After=systemd-journald.service chat.service
+Requires=systemd-journald.service chat.service
+
+[Service]
+ExecStart=/bin/sh -c "journalctl -f -u chat | ncat --ssl logs4.papertrailapp.com 47837"
+TimeoutStartSec=0
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

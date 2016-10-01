@@ -1,0 +1,30 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "ssh_username": "ubuntu"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "us-west-2",
+      "source_ami": "ami-d06a90b0",
+      "iam_instance_profile": "default_instance_profile",
+      "instance_type": "c3.large",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ami_name": "cgn base {{timestamp}}",
+      "associate_public_ip_address": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'",
+      "scripts": [
+        "amis/scripts/base.sh"
+      ]
+    }
+  ]
+}

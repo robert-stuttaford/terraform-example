@@ -1,0 +1,18 @@
+- name: Download Datomic
+  get_url: url=https://my.datomic.com/repo/com/datomic/datomic-pro/{{ datomic_version }}/datomic-pro-{{ datomic_version }}.zip
+           url_username={{ datomic_license_user }}
+           url_password={{ datomic_license_password }}
+           dest=/tmp/datomic-pro-{{ datomic_version }}.zip
+           owner=ubuntu group=users mode=555
+
+- name: Unpack Datomic
+  command: unzip /tmp/datomic-pro-{{ datomic_version }}.zip -d /tmp/ creates=/tmp/datomic-pro-{{ datomic_version }}
+
+- name: Move Datomic
+  command: mv /tmp/datomic-pro-{{ datomic_version }} /opt/datomic creates=/opt/datomic
+
+- name: Set up backup script
+  template: src=datomic-backup.sh dest=/opt/datomic-backup.sh owner=ubuntu group=users mode=555
+
+- name: Backup script timer
+  cron: name="Backup Datomic" minute="0,30" job="/opt/datomic-backup.sh"

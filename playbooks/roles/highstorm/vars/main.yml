@@ -1,0 +1,3 @@
+highstorm_memory_index_max: 1500m
+highstorm_object_cache_max: 6000m
+highstorm_xmx: 12000m
