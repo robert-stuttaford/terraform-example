@@ -93,8 +93,6 @@ aws_secret_access_key = ...
 
 ```
 
-Don't have access keys? Speak to Robert :-)
-
 Test that AWS is set up by calling `aws ec2 describe-instances` with a `--profile cgn-???` arg, which prints info about the user you're authenticated as.
 
 ### 2. Terraform
@@ -115,7 +113,6 @@ make remote
 ```
 
 This will allow you to download the current Terraform state for that env from S3.
-**Note:** Make sure you DO NOT source your `zsh-plugin`. The AWS keys in there will be used instead of the AWS credentials.
 
 Verify that it's working with `make plan`:
 
