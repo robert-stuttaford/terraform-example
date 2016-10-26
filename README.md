@@ -1,4 +1,4 @@
-# Terraform Example
+# Terraform Example - http://bit.ly/2eRXQ2q
 
 This code was extracted from Cognician's 3rd-gen AWS infrastructure on Oct 1 2016.
 
