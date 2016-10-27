@@ -72,10 +72,13 @@ Note that the `default` profile is empty; this is intentional. We'll declare a p
 region = us-west-2
 
 [profile cgn-master]
-region = us-east-1
+region = us-west-2
 
 [profile cgn-staging]
+role_arn = arn:aws:iam::SUB-ACCOUNT-ID:role/SUB-ACCOUNT-ROLE
+source_profile = cgn-master
 region = us-west-2
+
 ```
 
 `~/.aws/credentials`:
@@ -86,11 +89,6 @@ region = us-west-2
 [cgn-master]
 aws_access_key_id = ...
 aws_secret_access_key = ...
-
-[cgn-staging]
-aws_access_key_id = ...
-aws_secret_access_key = ...
-
 ```
 
 Test that AWS is set up by calling `aws ec2 describe-instances` with a `--profile cgn-???` arg, which prints info about the user you're authenticated as.
